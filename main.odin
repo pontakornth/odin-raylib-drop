@@ -39,9 +39,6 @@ main :: proc() {
 		if rl.IsKeyDown(.LEFT) {
 			playerX -= 300 * dt
 		}
-		if rl.IsKeyPressed(.SPACE) {
-			score += 1
-		}
 		playerX = rl.Clamp(playerX, 0, 800.0 - f32(bucketTexture.width))
 
 		if accumulatedTime >= 1 {
