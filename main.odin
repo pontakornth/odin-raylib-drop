@@ -89,9 +89,11 @@ main :: proc() {
 		}
 		rl.DrawTextureV(bucketTexture, {playerX, HEIGHT - f32(bucketTexture.height)}, rl.WHITE)
 		scoreText := fmt.tprintf("%d", score)
-		rl.DrawText(strings.clone_to_cstring(scoreText), 10, 10, 32, rl.BLACK)
+		rl.DrawText(strings.clone_to_cstring(scoreText, allocator=context.temp_allocator), 10, 10, 32, rl.BLACK)
 		rl.EndDrawing()
 
+		// Clear every temporary allocation each frame.
+		// The game is so small we don't have to worry about accidentally using freed memory.
 		free_all(context.temp_allocator)
 	}
 	rl.UnloadMusicStream(music)
